@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/product_header :: header('Список продуктов')">
+</head>
+<body>
+<p>Сортировка</p>
+<form th:method="get">
+    <label for="min">Минимальная цена</label><br>
+    <input id="min" name="min" th:value="${param.get('min')}" type="text"><br>
+    <label for="max">Максимальная цена</label><br>
+    <input id="max" name="max" th:value="${param.get('max')}" type="text"><br>
+    <input type="submit">
+</form>
+
+<p>Продукты</p>
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Название</td>
+        <td>Цена</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td><a th:href="@{/product/{id}(id=${product.id})}" th:text="${product.name}"></a></td>
+        <td th:text="${product.price}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/product/add}">Добавить продукт</a>
+</body>
+</html>
