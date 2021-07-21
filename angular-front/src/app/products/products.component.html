@@ -1,0 +1,16 @@
+<table>
+  <thead>
+  <tr>
+    <td>Id</td>
+    <td>Name</td>
+    <td>Price</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products">
+    <td>{{product.id}}</td>
+    <td><a routerLink="/product/{{product.id}}">{{product.name}}</a></td>
+    <td>{{product.price}}</td>
+  </tr>
+  </tbody>
+</table>
