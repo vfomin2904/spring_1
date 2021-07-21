@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/product_header :: header('Добавление продукта')">
+</head>
+<body>
+<form th:action="@{/product/add}" th:object="${product}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <input type="text" th:field="*{name}">
+    <input type="text" th:field="*{price}">
+    <input type="submit" value="Добавить">
+</form>
+</body>
+</html>
