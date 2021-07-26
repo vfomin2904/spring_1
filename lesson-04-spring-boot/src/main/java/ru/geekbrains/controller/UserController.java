@@ -40,7 +40,7 @@ public class UserController {
     public String newUserForm(Model model) {
         logger.info("New user page requested");
 
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserDto());
         return "user_form";
     }
 
@@ -54,8 +54,12 @@ public class UserController {
     }
 
     @PostMapping
-    public String update(@Valid User user, BindingResult result) {
+    public String update(@Valid @ModelAttribute("user") UserDto user, BindingResult result) {
         logger.info("Saving user");
+
+        if(!user.getPassword().equals(user.getRepeatPassword())){
+            result.rejectValue("repeatPassword", "", "Пароли не совпадают");
+        }
 
         if (result.hasErrors()) {
             return "user_form";

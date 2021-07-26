@@ -1,8 +1,6 @@
 package ru.geekbrains.persist;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -12,19 +10,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Column(nullable = false)
     private String username;
 
-    @Min(value = 18)
     @Column(nullable = false)
     private Integer age;
+
+    @Column
+    private String password;
 
     public User() {
     }
 
-    public User(String username, Integer age) {
+    public User(Long id, String username, String password, Integer age) {
+        this.id = id;
         this.username = username;
+        this.password = password;
         this.age = age;
     }
 
@@ -50,5 +51,13 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
