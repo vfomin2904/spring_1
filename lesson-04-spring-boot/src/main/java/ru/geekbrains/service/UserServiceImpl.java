@@ -9,10 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.controller.UserDto;
 import ru.geekbrains.controller.UserListParams;
+import ru.geekbrains.persist.Role;
 import ru.geekbrains.persist.User;
 import ru.geekbrains.persist.UserRepository;
 import ru.geekbrains.persist.UserSpecifications;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -73,7 +75,8 @@ public class UserServiceImpl implements UserService {
                 userDto.getId(),
                 userDto.getUsername(),
                 passwordEncoder.encode(userDto.getPassword()),
-                userDto.getAge());
+                userDto.getAge(),
+                Collections.singleton(new Role(1L, "ROLES_USER")));
         userRepository.save(user);
     }
 
