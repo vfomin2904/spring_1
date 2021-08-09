@@ -13,6 +13,7 @@ import ru.geekbrains.persist.User;
 import ru.geekbrains.service.UserService;
 
 import javax.validation.Valid;
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/user")

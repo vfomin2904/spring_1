@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/product_header :: header('Список продуктов')">
 </head>
 <body>
@@ -29,6 +29,6 @@
     </tr>
     </tbody>
 </table>
-<a th:href="@{/product/add}">Добавить продукт</a>
+<a th:href="@{/product/add}" sec:authorize="hasRole('ROLE_SUPER_ADMIN')">Добавить продукт</a>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags -->
@@ -15,26 +15,12 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">EShop</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">List</a>
-            </li>
-        </ul>
-    </div>
+<nav th:replace="fragments/navigation.html :: navigation">
 </nav>
 
 <div class="container">
     <div class="row py-2">
-        <div class="col-12">
+        <div sec:authorize="hasRole('ROLE_SUPER_ADMIN')"  class="col-12">
             <a class="btn btn-primary" th:href="@{/user/new}">Add User</a>
         </div>
 
@@ -67,7 +53,7 @@
                     <th scope="col" th:replace="fragments/sort_header :: sort_header ('Id', 'id')"></th>
                     <th scope="col" th:replace="fragments/sort_header :: sort_header ('Username', 'username')"></th>
                     <th scope="col" th:replace="fragments/sort_header :: sort_header ('Age', 'age')"></th>
-                    <th scope="col">Actions</th>
+                    <th sec:authorize="hasRole('ROLE_SUPER_ADMIN')" scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,7 +61,7 @@
                     <th scope="row" th:text="${user.id}">1</th>
                     <td th:text="${user.username}">Alex</td>
                     <td th:text="${user.age}">22</td>
-                    <td>
+                    <td sec:authorize="hasRole('ROLE_SUPER_ADMIN')" >
                         <a class="btn btn-success" th:href="@{/user/{id}(id = ${user.id})}"><i class="fas fa-edit"></i></a>
                         <form class="d-inline" th:method="delete" th:action="@{/user/{id}(id = ${user.id})}">
                             <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>

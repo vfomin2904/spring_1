@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/product_header :: header('Добавление продукта')">
 </head>
 <body>
@@ -7,7 +7,7 @@
     <input type="hidden" th:field="*{id}">
     <input type="text" th:field="*{name}">
     <input type="text" th:field="*{price}">
-    <input type="submit" value="Добавить">
+    <input type="submit" sec:authorize="hasRole('ROLE_SUPER_ADMIN')" value="Добавить">
 </form>
 </body>
 </html>
